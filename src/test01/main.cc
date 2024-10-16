@@ -6,8 +6,8 @@
 
 namespace {
 
-const size_t SIZE = 50 * 1000 * 1000;
-double v[SIZE];
+const size_t kArraySize = 50 * 1000 * 1000;
+double v[kArraySize];
 
 }  // namespace
 
@@ -25,16 +25,17 @@ double VectorReduction(double* v, size_t n) {
 int main(int argc, char* argv[]) {
   const auto t0 = std::chrono::high_resolution_clock::now();
   //task_scheduler_init(task_scheduler_init::automatic);
-  VectorInit(v, SIZE);
+  VectorInit(v, kArraySize);
 
   double sum{};
   for (int i = 0; i < 100; i++) {
-    sum = VectorReduction(v, SIZE);
+    sum += VectorReduction(v, kArraySize);
   }
 
   const auto t1 = std::chrono::high_resolution_clock::now();
   const auto duration = std::chrono::duration_cast<std::chrono::milliseconds>(t1 - t0).count();
   std::cout << "Duration: " << duration / 1000.0 << " seconds" << std::endl;
+  std::cout << "Sum: " << sum << std::endl;
 
   return 0;
 }

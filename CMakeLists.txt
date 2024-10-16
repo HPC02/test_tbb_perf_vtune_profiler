@@ -21,4 +21,6 @@ endif()
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY "${PROJECT_SOURCE_DIR}/bin")
 set(CMAKE_LIBRARY_OUTPUT_DIRECTORY "${PROJECT_SOURCE_DIR}/lib")
 
+include_directories(3rd/include)
+
 add_subdirectory(src)
