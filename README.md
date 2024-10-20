@@ -4,6 +4,17 @@
 
  `VTune Profiler` 进行性能分析：[使用VTune Profiler测试TBB overhead](https://www.intel.com/content/www/us/en/docs/vtune-profiler/cookbook/2024-1/intel-tbb-scheduling-overhead.html)。
 
+### 1.1 编译选项 ###
+
+```cmake
+# 1. enable frame pointer optimization
+# 2. disable optimize sibling calls (disable call instructions optimized to jump)
+# 3. enable debug symbols
+target_compile_options(${target_name1} PRIVATE -fno-omit-frame-pointer -fno-optimize-sibling-calls -ggdb)
+```
+
+* [(GCC) gcc 编译选项 -fno-omit-frame-pointer，-fno-tree-vectorize，fno-optimize-sibling-calls；及内存泄漏、非法访问检测 ASAN](https://www.cnblogs.com/vaughnhuang/p/16435356.html)
+
 ## 2. 资料 ##
 
 * `Intel TBB` API 使用教程：[Intel® oneAPI Threading Building Blocks](https://www.intel.com/content/www/us/en/docs/onetbb/developer-guide-api-reference/2021-13/reduction.html)

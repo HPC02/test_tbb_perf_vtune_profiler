@@ -1,4 +1,5 @@
 #include <stdlib.h>
+#include <unistd.h>  // getpid
 #include <chrono>
 #include <cstddef>
 #include <iostream>
@@ -46,6 +47,9 @@ double VectorReduction(double* v, size_t n) {
 }
 
 int main(int argc, char* argv[]) {
+  const pid_t pid = getpid();
+  std::cout << argv[0] << ". Process ID: " << pid << std::endl;
+
   constexpr size_t kTestLoopNum = 1000 * 10;
   const auto t0 = std::chrono::high_resolution_clock::now();
   //task_scheduler_init(task_scheduler_init::automatic);
