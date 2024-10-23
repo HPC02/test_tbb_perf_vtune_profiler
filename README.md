@@ -13,7 +13,7 @@
 target_compile_options(${target_name1} PRIVATE -fno-omit-frame-pointer -fno-optimize-sibling-calls -ggdb)
 ```
 
-* [(GCC) gcc 编译选项 -fno-omit-frame-pointer，-fno-tree-vectorize，fno-optimize-sibling-calls；及内存泄漏、非法访问检测 ASAN](https://www.cnblogs.com/vaughnhuang/p/16435356.html)
+* [(GCC) gcc 编译选项 -fno-omit-frame-pointer, -fno-tree-vectorize, -fno-optimize-sibling-calls, 及内存泄漏、非法访问检测 ASAN](https://www.cnblogs.com/vaughnhuang/p/16435356.html)
 
 ## 2. 资料 ##
 
@@ -42,11 +42,11 @@ target_compile_options(${target_name1} PRIVATE -fno-omit-frame-pointer -fno-opti
 tbb::blocked_range<double*>(v, v + n, 1000)
 ```
 
-设置`grain size`之前，显示的热点 `call stack` 如下图（100次循环）：
+设置`grain size`之前，显示的热点 `call stack` 如下图 (100次循环):
 
 ![grain_size_default_1](./doc/images/perf_no_grain_size_set.png)
 
-设置`grain size`等于10000，`Intel TBB` 内部调度时间明显减少（10000次循环）：
+设置`grain size`等于10000, `Intel TBB` 内部调度时间明显减少 (10000次循环):
 
 ![grain_size_10000](./doc/images/perf_grain_size_10000.png)
 
@@ -65,3 +65,7 @@ tbb::task_arena ta(8);
 
   return sum;
 ```
+
+## 4. 使用VTune Profiler & linux perf 测试 ##
+
+见 [性能测试以及各种优化对比测试](/doc/profiline_tests.md) .
