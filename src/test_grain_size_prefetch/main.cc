@@ -11,7 +11,7 @@ namespace {
 
 constexpr size_t kGrainSize = 1000 * 10;
 constexpr size_t kArraySize = 50 * 1000 * 1000;
-double v[kArraySize];
+double v[kArraySize] __attribute__((aligned(4096)));
 
 }  // namespace
 
