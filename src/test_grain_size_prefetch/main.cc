@@ -45,9 +45,9 @@ double VectorReduction(double* v, size_t n) {
     [](const tbb::blocked_range<double*>& r, double value) -> double {
       size_t count{};
       for (auto it = r.begin(); it != r.end(); ++it) {
-        if ((count % 16) == 0) {
+        /*if ((count % 8) == 0) {
           __builtin_prefetch(it + 8, 0, 3);  // Prefetch the next 16 elements
-        }
+        }*/
         value += *it;
         count++;
       }
@@ -65,10 +65,16 @@ int main(int argc, char* argv[]) {
   //task_scheduler_init(task_scheduler_init::automatic);
   VectorInit(v, kArraySize);
 
+  asm("nop");
+  asm("nop");
+
   double sum{};
   for (int i = 0; i < kTestLoopNum; i++) {
     sum = VectorReduction(v, kArraySize);
   }
+
+  asm("nop");
+  asm("nop");
 
   const auto t1 = std::chrono::high_resolution_clock::now();
   const auto duration = std::chrono::duration_cast<std::chrono::milliseconds>(t1 - t0).count();

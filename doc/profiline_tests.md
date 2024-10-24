@@ -36,8 +36,19 @@ double VectorReduction(double* v, size_t n) {
 }
 ```
 
-测试代码运行时间 `232.998 seconds` .
+测试代码运行时间 `232.349 seconds`， 有时候可能会更差。
 
+1. 在循环内部添加`prefetch` `hint`，可能会阻止CPU使用向量指令(SIMD/NEON)。在外部使用`prefetch`则不会。见下面`ARM`参考文档。
+2. `prefetch`只是给硬件的`hint`，是否执行还是取决于硬件。
+
+## 2. prefetch 编译选项 ##
+
+```bash
+# gcc O3 编译开启该选项
+target_compile_options(${target_name1} PRIVATE -Ofast -funroll-loops -fprefetch-loop-arrays -march=native)
+```
+
+使用效果还需要测试验证。在本测试代码中，使用编译选项产生一些负优化。
 
 ## 参考资料 ##
 
